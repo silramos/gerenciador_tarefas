@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(value = "tarefa")
+@Document(value = "tarefas")
 public class Tarefa {
 
     @Id

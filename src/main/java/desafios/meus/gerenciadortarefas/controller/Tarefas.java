@@ -2,7 +2,6 @@ package desafios.meus.gerenciadortarefas.controller;
 
 import desafios.meus.gerenciadortarefas.dto.TarefaDTO;
 import desafios.meus.gerenciadortarefas.enums.StatusEnum;
-import desafios.meus.gerenciadortarefas.model.Tarefa;
 import desafios.meus.gerenciadortarefas.service.TarefasService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableMongoRepositories
-public class GerenciadortarefasApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GerenciadortarefasApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }
