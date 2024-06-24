@@ -2,7 +2,6 @@ package desafios.meus.gerenciadortarefas.converters;
 
 import desafios.meus.gerenciadortarefas.dto.AnexoDTO;
 import desafios.meus.gerenciadortarefas.model.Anexo;
-import org.bson.types.ObjectId;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

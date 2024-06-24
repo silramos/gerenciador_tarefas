@@ -3,15 +3,12 @@ package desafios.meus.gerenciadortarefas.controller;
 import desafios.meus.gerenciadortarefas.dto.AnexoDTO;
 import desafios.meus.gerenciadortarefas.service.AnexosService;
 import desafios.meus.gerenciadortarefas.service.S3Service;
-import desafios.meus.gerenciadortarefas.service.TarefasService;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

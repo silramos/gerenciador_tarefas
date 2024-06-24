@@ -7,15 +7,8 @@ import desafios.meus.gerenciadortarefas.dto.AnexoDTO;
 import desafios.meus.gerenciadortarefas.repository.AnexosRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
@@ -26,11 +19,11 @@ import java.util.Objects;
 @Service
 public class AnexosService {
 
-    AnexosRepository repositorio;
+    final AnexosRepository repositorio;
 
-    DeAnexoDTOParaAnexo conversorDeDTO;
+    final DeAnexoDTOParaAnexo conversorDeDTO;
 
-    DeAnexoParaAnexoDTO conversorDeAnexo;
+    final DeAnexoParaAnexoDTO conversorDeAnexo;
 
     private final S3Service s3;
 

@@ -3,7 +3,6 @@ package desafios.meus.gerenciadortarefas.service;
 import desafios.meus.gerenciadortarefas.config.exceptions.ErroDeValidacao;
 import desafios.meus.gerenciadortarefas.converters.DeTarefaDTOParaTarefa;
 import desafios.meus.gerenciadortarefas.converters.DeTarefaParaTarefaDTO;
-import desafios.meus.gerenciadortarefas.dto.AnexoDTO;
 import desafios.meus.gerenciadortarefas.dto.TarefaDTO;
 import desafios.meus.gerenciadortarefas.enums.StatusEnum;
 import desafios.meus.gerenciadortarefas.repository.TarefasRepository;
