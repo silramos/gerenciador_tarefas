@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @Repository
 public interface TarefasRepository extends ReactiveMongoRepository<Tarefa, ObjectId> {
 
@@ -15,4 +17,6 @@ public interface TarefasRepository extends ReactiveMongoRepository<Tarefa, Objec
     Mono<Boolean> existsByIdOrTitulo(ObjectId id, String titulo);
 
     Mono<Boolean> existsByTitulo(String titulo);
+
+    Mono<Boolean> existsByTituloAndIdNot(String titulo, ObjectId id);
 }

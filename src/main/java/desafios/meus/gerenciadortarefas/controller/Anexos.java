@@ -3,18 +3,22 @@ package desafios.meus.gerenciadortarefas.controller;
 import desafios.meus.gerenciadortarefas.dto.AnexoDTO;
 import desafios.meus.gerenciadortarefas.service.AnexosService;
 import desafios.meus.gerenciadortarefas.service.S3Service;
+import desafios.meus.gerenciadortarefas.service.TarefasService;
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
-import java.nio.file.Files;
+import java.util.List;
 
 @RestController
-@RequestMapping("/anexos")
+@RequestMapping("/rest/anexos")
 public class Anexos {
 
     private final AnexosService servico;
@@ -28,39 +32,26 @@ public class Anexos {
         this.s3 = s3;
     }
 
-    @PostMapping("/upload")
-    public Mono<AnexoDTO> uploadFile(@RequestPart("anexo") FilePart anexoBin) {
-        String key = System.currentTimeMillis() + "_" + anexoBin.filename();
-
-        return Mono.fromCallable(() -> Files.createTempFile("upload", null))
-                .subscribeOn(Schedulers.boundedElastic())
-                .flatMap(anexoTemp -> anexoBin.transferTo(anexoTemp)
-                        .then(Mono.fromCallable(() -> {
-                            s3.upload(NOME_BUCKET, key, anexoTemp.toString());
-                            Files.deleteIfExists(anexoTemp);
-                            return anexoTemp;
-                        }).subscribeOn(Schedulers.boundedElastic()))
-                )
-                .flatMap(anexoTemp -> {
-                    AnexoDTO dto = AnexoDTO.builder()
-                            .nome(anexoBin.filename())
-                            .s3Key(key)
-                            .build();
-                    return servico.inserir(dto);
-                });
+    @PostMapping(
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public Flux<AnexoDTO> uploadFiles(@RequestParam("anexo") List<MultipartFile> anexos) {
+        return Flux.fromIterable(anexos)
+                .flatMap(servico::upload);
     }
 
-    @GetMapping("/download/{id}")
-    public Mono<Void> downloadFile(@PathVariable String id, ServerHttpResponse resposta) {
+    @GetMapping("/{id}/download")
+    public Mono<ResponseEntity<Flux<DataBuffer>>> downloadFile(@PathVariable String id) {
         return servico.recuperar(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("Recurso não encontrado")))
                 .flatMap(anexo -> {
                     String key = anexo.getS3Key();
+                    Flux<DataBuffer> fileStream = s3.download(NOME_BUCKET, key);
 
-                    resposta.getHeaders().set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + anexo.getNome() + "\"");
-                    resposta.getHeaders().setContentType(MediaType.APPLICATION_OCTET_STREAM);
-
-                    return resposta.writeWith(s3.download(NOME_BUCKET, key));
+                    return Mono.just(ResponseEntity.ok()
+                            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + anexo.getNome() + "\"")
+                            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                            .body(fileStream));
                 });
     }
 }

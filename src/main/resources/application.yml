@@ -1,3 +1,9 @@
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAYS2NWB56SXWDXH6N
+      secret-key: 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
+
 spring:
   application:
     name: gerenciadortarefas
@@ -16,3 +22,7 @@ server:
 logging:
   level:
     root: debug
+
+#s3:
+#  keyId: AKIAYS2NWB563VLQQNAF
+#  secretKey: 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

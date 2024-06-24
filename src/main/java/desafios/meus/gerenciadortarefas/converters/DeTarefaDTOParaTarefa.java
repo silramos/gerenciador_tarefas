@@ -6,6 +6,12 @@ import org.bson.types.ObjectId;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 public class DeTarefaDTOParaTarefa implements Converter<TarefaDTO, Tarefa> {
 
@@ -18,8 +24,13 @@ public class DeTarefaDTOParaTarefa implements Converter<TarefaDTO, Tarefa> {
                 .descricao(fonte.getDescricao())
                 .prioridade(fonte.getPrioridade())
                 .responsavel(fonte.getResponsavel())
-                .status(fonte.getStatus().getNome())
+                .status(fonte.getStatus() != null ? fonte.getStatus().getNome() : null)
                 .titulo(fonte.getTitulo())
+                .anexos(Optional.ofNullable(fonte.getAnexos()).orElseGet(HashSet::new)
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .map(ObjectId::new)
+                        .collect(Collectors.toSet()))
                 .build();
     }
 }
