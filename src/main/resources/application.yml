@@ -1,8 +1,10 @@
 cloud:
   aws:
     credentials:
-      access-key: AKIAYS2NWB56SXWDXH6N
-      secret-key: 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
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
+    # Utilize seu próprio bucket
+    bucket-name: ${BUCKET_NAME}
 
 spring:
   application:

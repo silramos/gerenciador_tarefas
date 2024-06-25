@@ -7,6 +7,7 @@ import desafios.meus.gerenciadortarefas.dto.AnexoDTO;
 import desafios.meus.gerenciadortarefas.repository.AnexosRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
@@ -27,7 +28,8 @@ public class AnexosService {
 
     private final S3Service s3;
 
-    private static final String NOME_BUCKET = "gerenciador-tarefas220122";
+    @Value("${cloud.aws.bucket-name}")
+    private String nomeBucket;
 
     @Autowired
     public AnexosService(AnexosRepository repositorio, DeAnexoDTOParaAnexo deDTO, DeAnexoParaAnexoDTO deAnexo, S3Service s3Service) {
@@ -47,7 +49,7 @@ public class AnexosService {
                 })
                 .subscribeOn(Schedulers.boundedElastic())
                 .flatMap(temporario -> Mono.fromCallable(() -> {
-                            s3.upload(NOME_BUCKET, key, temporario.getPath());
+                            s3.upload(nomeBucket, key, temporario.getPath());
                             return temporario;
                         })
                         .subscribeOn(Schedulers.boundedElastic()))
