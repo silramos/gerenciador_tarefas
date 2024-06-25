@@ -1,36 +1,18 @@
 services:
   mongodb:
     image: mongo
-    container_name: mongodb
     ports:
       - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
 
-  redis-server:
+  redis:
     image: redis
-    container_name: redis
     ports:
       - "6379:6379"
 
-  springboot-app:
+  app:
     build: .
-    container_name: springboot-app
     ports:
       - "8089:8089"
-    environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/gerenciador_tarefas
-      SPRING_DATA_MONGODB_DATABASE: gerenciador_tarefas
     depends_on:
       - mongodb
-      - redis-server
-    networks:
-      - backend
-
-networks:
-  backend:
-    driver: bridge
-
-volumes:
-  mongodb_data:
-    driver: local
+      - redis

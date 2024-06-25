@@ -56,7 +56,7 @@ public class AnexosService {
                             return temporario;
                         })
                         .subscribeOn(Schedulers.boundedElastic()))
-                .flatMap(temporario -> {
+                .flatMap(ignored -> {
                     AnexoDTO dto = AnexoDTO.builder()
                             .nome(anexo.getOriginalFilename())
                             .s3Key(key)

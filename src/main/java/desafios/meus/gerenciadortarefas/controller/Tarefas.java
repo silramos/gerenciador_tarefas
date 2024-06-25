@@ -1,6 +1,6 @@
 package desafios.meus.gerenciadortarefas.controller;
 
-import desafios.meus.gerenciadortarefas.dto.IdsAnexos;
+import desafios.meus.gerenciadortarefas.dto.VinculadorAnexosDTO;
 import desafios.meus.gerenciadortarefas.dto.TarefaDTO;
 import desafios.meus.gerenciadortarefas.enums.StatusEnum;
 import desafios.meus.gerenciadortarefas.service.TarefasService;
@@ -42,10 +42,10 @@ public class Tarefas {
     }
 
     @PutMapping("/{id}/anexos")
-    public Mono<TarefaDTO> adicionarAnexo(@PathVariable String id, @RequestBody IdsAnexos idsAnexos) {
+    public Mono<TarefaDTO> adicionarAnexo(@PathVariable String id, @RequestBody VinculadorAnexosDTO idsAnexos) {
         return servico.recuperar(id)
                 .flatMap(tarefa -> {
-                    idsAnexos.getIds().forEach(tarefa::addAnexo);
+                    idsAnexos.getIdsAnexos().forEach(tarefa::addAnexo);
 
                     return servico.atualizar(id, tarefa);
                 });

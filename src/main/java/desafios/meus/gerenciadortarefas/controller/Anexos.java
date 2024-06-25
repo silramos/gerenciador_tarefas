@@ -12,8 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/rest/anexos")
 public class Anexos {
@@ -33,8 +31,8 @@ public class Anexos {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
-    public Flux<AnexoDTO> uploadFiles(@RequestParam("anexo") List<MultipartFile> anexos) {
-        return Flux.fromIterable(anexos)
+    public Mono<AnexoDTO> uploadFiles(@RequestParam("anexo") MultipartFile anexo) {
+        return Mono.just(anexo)
                 .flatMap(servico::upload);
     }
 

@@ -12,8 +12,11 @@ spring:
       name: user
       password: 123
   data:
+    mongodb:
+      host: mongodb
+      port: 27017
     redis:
-      host: localhost
+      host: redis
       port: 6379
 
 server:
@@ -22,7 +25,3 @@ server:
 logging:
   level:
     root: debug
-
-#s3:
-#  keyId: AKIAYS2NWB563VLQQNAF
-#  secretKey: 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
