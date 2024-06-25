@@ -35,7 +35,7 @@ Certifique-se de ter instalado em sua máquina:
 
 ## Acessando a Aplicação
 
-Uma vez que o Docker Compose ou o Maven tenham iniciado todos os serviços, a aplicação estará disponível nos seguinte host e porta:
+Uma vez que o Docker Compose ou o Maven tenham iniciado todos os serviços, a aplicação estará disponível no seguinte host e porta:
 
 - **Aplicação Spring Boot**: http://localhost:8089
 - **Swagger**: Será realizado redirecionamento automático para o swagger http://localhost:8089/swagger-ui.html
