@@ -46,6 +46,6 @@ O projeto conta com Spring Security e é necessária autenticação para utiliza
 
 ## Testes
 
-Somente estão implementado os testes unitários da classe `src/main/java/desafios/meus/gerenciadortarefas/service/AnexosService.java`. Para execução dos testes unitários (surefire) basta utilizar o comando:
+Somente estão implementados os testes unitários da classe `src/main/java/desafios/meus/gerenciadortarefas/service/AnexosService.java`. Para execução dos testes unitários (surefire) basta utilizar o comando:
    ```bash
    mvn clean test
