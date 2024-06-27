@@ -1,6 +1,6 @@
 # Projeto Gerenciador de Tarefas
 
-Este é um projeto de exemplo de um sistema de gerenciamento de tarefas desenvolvido em Java 17, utilizando Spring Boot, MongoDB como banco de dados, Redis para cache e integração com Amazon S3 para armazenamento de anexos. Este README fornecerá uma visão geral do projeto, os pré-requisitos para execução, instruções de instalação e execução, além de informações adicionais relevantes.
+Este é um projeto de exemplo de um sistema de gerenciamento de tarefas desenvolvido em Java 17, utilizando Spring Boot, Spring webflux, MongoDB como banco de dados, Redis para cache e integração com Amazon S3 para armazenamento de anexos. Este README fornecerá uma visão geral do projeto, os pré-requisitos para execução, instruções de instalação e execução, além de informações adicionais relevantes.
 
 ## Pré-requisitos
 
