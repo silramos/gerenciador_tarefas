@@ -20,13 +20,13 @@ Certifique-se de ter instalado em sua máquina:
 
 ## Configuração do Ambiente
 
-1. **Variáveis**:
-Preencher as variáveis de ambiente em `src/main/resources/application.yml`.
-
-2. **Clonar o Repositório**:
+1. **Clonar o Repositório**:
    ```bash
    git clone https://github.com/silramos/gerenciador_tarefas.git
    cd gerenciador_tarefas
+
+2. **Variáveis**:
+Preencher as variáveis de ambiente em `src/main/resources/application.yml`.   
 
 3. **Executar projeto com o maven**:
    ```bash
